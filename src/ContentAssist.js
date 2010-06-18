@@ -13,7 +13,8 @@
 function ContentAssist(viewer, processor, options) {
 	this.viewer = viewer;
 	this.options = {
-		visible_items: 10
+		visible_items: 10,
+		css_plugin: false
 	};
 	
 	this.setProcessor(processor);

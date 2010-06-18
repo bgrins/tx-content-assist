@@ -8,9 +8,15 @@
  * 
  * @include "TextViewer.js"
  * @include "CompletitionProposal.js"
- */function ContentAssistProcessor(words) {
+ */function ContentAssistProcessor(words, css_plugin) {
 	if (words)
 		this.setWords(words);
+		
+	this.css_plugin = css_plugin;
+	if (css_plugin) {
+		this.cssProcessor = new ContentAssistCSSPlugin();
+		this.setWords(this.cssProcessor.words);
+	}
 }
 
 ContentAssistProcessor.prototype = {
@@ -47,6 +53,10 @@ ContentAssistProcessor.prototype = {
 		var proposals = null,
 			suggestions = this.suggestWords(cur_word);
 			
+		if (this.css_plugin) {
+			suggestions = this.cssProcessor.process(suggestions, viewer, offset);
+		}
+		
 		if (suggestions.length) {
 			proposals = [];
 			

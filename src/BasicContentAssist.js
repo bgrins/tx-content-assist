@@ -8,7 +8,8 @@
  * @author Sergey Chikuyonok (serge.che@gmail.com)
  * @link http://chikuyonok.ru
  */function BasicContentAssist(textarea, words, options) {
+	options = options || {};
 	this.viewer = new TextViewer(textarea);
-	this.processor = new ContentAssistProcessor(words);
+	this.processor = new ContentAssistProcessor(words, options.css_plugin);
 	this.content_assist = new ContentAssist(this.viewer, this.processor, options);
 }
